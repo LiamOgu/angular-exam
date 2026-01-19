@@ -1,1 +1,43 @@
-<p>pet-list-component works!</p>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Pensionnaires</h1>
+  <div class="filter mb-4">
+    <input
+      class="btn filter-reset"
+      type="radio"
+      name="filter"
+      [(ngModel)]="filterValue"
+      value="all"
+      aria-label="Tous"
+    />
+    <input
+      class="btn"
+      type="radio"
+      name="filter"
+      [(ngModel)]="filterValue"
+      value="urgency"
+      aria-label="Urgence uniquement"
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    @for (pet of pets; track pet.id) {
+    <div class="card bg-base-100 border border-base-300">
+      <div class="card-body">
+        <div class="flex gap-2">
+          <h2 class="card-title">{{ pet.name }}</h2>
+          @if (pet.needCare) {
+          <div class="badge badge-soft badge-warning">Soins requis</div>
+          }
+        </div>
+        <p class="text-sm text-base-content/60">{{ pet.species }}</p>
+        <p class="text-sm mt-2">{{ pet.description }}</p>
+
+        <div class="card-actions justify-end mt-4">
+          <button (click)="updateCareStatus(pet.id)" class="btn btn-sm">Check</button>
+          <button [routerLink]="['/animal', pet.id]" class="btn btn-sm">Détails</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

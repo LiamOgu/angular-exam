@@ -1,1 +1,33 @@
-<p>pet-detail-component works!</p>
+<div class="container mx-auto px-4 py-8">
+  @if (pet) {
+  <div class="max-w-2xl mx-auto">
+    <button (click)="goBack()" class="btn btn-sm mb-4">Retour</button>
+
+    <div class="card bg-base-100 border border-base-300">
+      <div class="card-body">
+        <div class="flex gap-2 mb-2">
+          <h1 class="card-title text-2xl">{{ pet.name }}</h1>
+          @if (pet.needCare) {
+          <div class="badge badge-soft badge-warning">Soins requis</div>
+          }
+        </div>
+
+        <p class="text-sm text-base-content/60 mb-4">{{ pet.species }}</p>
+
+        <p class="text-sm mb-4">{{ pet.description }}</p>
+
+        <div class="card-actions justify-end mt-4">
+          <button (click)="updateCareStatus()" class="btn btn-sm">
+            @if (pet.needCare) { Marquer comme soigné } @else { Nécessite des soins }
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  } @else {
+  <div class="text-center py-12">
+    <p>Animal non trouvé</p>
+    <button (click)="goBack()" class="btn btn-sm mt-4">Retour</button>
+  </div>
+  }
+</div>
